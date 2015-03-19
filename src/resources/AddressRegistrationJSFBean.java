@@ -1,5 +1,6 @@
 package resources;
 
+import java.io.Serializable;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
@@ -9,7 +10,7 @@ import javax.inject.Named;
 
 @Named(value = "addressRegistration")
 @SessionScoped
-public class AddressRegistrationJSFBean {
+public class AddressRegistrationJSFBean implements Serializable{
 	private String lastName;
 	private String firstName;
 	private String mi;
@@ -24,11 +25,11 @@ public class AddressRegistrationJSFBean {
 	private PreparedStatement pstmt;
 
 	public AddressRegistrationJSFBean() {
-		initializeJDBC();
+		initializeJdbc();
 	}
 	
 	/** Initialize database connection */
-	private void initializeJDBC() {
+	private void initializeJdbc() {
 		try {
 			// Explicitly load a MySQL driver
 			Class.forName("com.mysql.jdbc.Driver");
@@ -36,7 +37,7 @@ public class AddressRegistrationJSFBean {
 
 			// Establish a connection
 			Connection conn = DriverManager.getConnection(
-					"jdbc:mysql://localhost:3306/jpadb", "drytuna", "Pa$$word");
+					"jdbc:mysql://localhost:3306/javabook", "drytuna", "Pa$$word");
 
 			// Create a Statement
 			pstmt = conn.prepareStatement("insert into Address (lastName,"

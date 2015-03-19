@@ -1,5 +1,6 @@
 package resources;
 
+import java.io.Serializable;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
@@ -12,22 +13,22 @@ import javax.inject.Named;
 
 @Named(value = "courseName")
 @ApplicationScoped
-public class CourseNameJSFBean {
-	private PreparedStatement studentStatement;
+public class CourseNameJSFBean implements Serializable{
+	private PreparedStatement studentStatement = null;
 	private String choice;
 	private String[] titles;
 	
 	public CourseNameJSFBean() {
-		initializeJDBC();
+		initializeJdbc();
 	}
 	
-	public void initializeJDBC() {
+	public void initializeJdbc() {
 		try {
 			Class.forName("com.mysql.jdbc.Driver");
 			System.out.println("Driver loaded");
 			
 			Connection conn = DriverManager.getConnection(
-					"jdbc:mysql://localhost:3306/jpadb", "drytuna", "Pa$$word");
+					"jdbc:mysql://localhost:3306/javabook", "drytuna", "Pa$$word");
 			
 			PreparedStatement stmt = conn.prepareStatement(
 					"select title from course");
@@ -69,7 +70,7 @@ public class CourseNameJSFBean {
 		return titles;
 	}
 
-	public ResultSet getStudent() throws SQLException {
+	public ResultSet getStudents() throws SQLException {
 		if (choice == null) {
 			if (titles.length == 0)
 				return null;
