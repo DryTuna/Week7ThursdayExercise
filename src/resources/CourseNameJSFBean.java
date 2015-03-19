@@ -18,10 +18,10 @@ public class CourseNameJSFBean {
 	private String[] titles;
 	
 	public CourseNameJSFBean() {
-		initializeJdbc();
+		initializeJDBC();
 	}
 	
-	public void initializeJdbc() {
+	public void initializeJDBC() {
 		try {
 			Class.forName("com.mysql.jdbc.Driver");
 			System.out.println("Driver loaded");
